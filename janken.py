@@ -6,8 +6,14 @@ print("じゃんけんゲーム開催")
 
 # プレイヤー選択
 def user_select():
-    user_select = input("グー(g)、チョキ(c)、パー(p)をアルファベットで選んでください:")
-    return user_select
+    while True:
+        user_select = input("グー(g)、チョキ(c)、パー(p)をアルファベットで選んでください:").lower()
+        if user_select in janken:
+            print(f"あなたは{user_select}を選びました")
+            return user_select
+        else:
+            print("グー(g)、チョキ(c)、パー(p)のいずれかを選んでください")
+
 
 # com選択
 def com_select():
@@ -39,12 +45,14 @@ def janken_game():
         user = user_select()
         com = com_select()
         win, lose, even = game_result(user, com, win, lose, even)
-        game_continue = input("つづけますか？'y' or 'n':")
+        game_continue = input("つづけますか？'y' or 'n':").lower()
         if game_continue == "n":
             print("ゲーム終了")
             print(f"結果は{win}勝{lose}敗{even}分")
             is_game_over = True
+        elif game_continue == "y":
+            print("ゲームを続けます")
         else:
-            print("つづけます")
+            print("不正な入力です。再度入力してください")
 
 janken_game()
